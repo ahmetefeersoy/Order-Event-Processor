@@ -1,4 +1,4 @@
-package com.example.kafkademo.model;
+package com.example.ordereventprocessor.model;
 
 public class OrderRequest {
     private String orderId;

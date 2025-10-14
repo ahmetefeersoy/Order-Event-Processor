@@ -1,4 +1,4 @@
-package com.example.kafkademo.listener;
+package com.example.ordereventprocessor.listener;
 
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;

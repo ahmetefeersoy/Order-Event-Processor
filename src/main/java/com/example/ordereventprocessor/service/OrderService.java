@@ -1,8 +1,9 @@
-package com.example.kafkademo.service;
+package com.example.ordereventprocessor.service;
 
-import com.example.kafkademo.model.OrderRequest;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+
+import com.example.ordereventprocessor.model.OrderRequest;
 
 @Service
 public class OrderService {

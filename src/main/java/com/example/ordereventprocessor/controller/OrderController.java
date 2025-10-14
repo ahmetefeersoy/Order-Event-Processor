@@ -1,11 +1,12 @@
-package com.example.kafkademo.controller;
+package com.example.ordereventprocessor.controller;
 
-import com.example.kafkademo.service.OrderService;
-import com.example.kafkademo.model.OrderRequest;
 import java.util.List;
 import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.*;
+
+import com.example.ordereventprocessor.model.OrderRequest;
+import com.example.ordereventprocessor.service.OrderService;
 
 
 @RestController
