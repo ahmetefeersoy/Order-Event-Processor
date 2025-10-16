@@ -2,7 +2,6 @@ package com.example.ordereventprocessor.controller;
 
 import com.example.ordereventprocessor.model.OrderEntity;
 import com.example.ordereventprocessor.repository.OrderRepository;
-import com.example.ordereventprocessor.service.SupabaseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +12,9 @@ import java.util.List;
 public class SupabaseOrderController {
 
     private final OrderRepository orderRepository;
-    private final SupabaseService supabaseService;
 
-    public SupabaseOrderController(OrderRepository orderRepository, SupabaseService supabaseService) {
+    public SupabaseOrderController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-        this.supabaseService = supabaseService;
     }
 
 
@@ -34,10 +31,16 @@ public class SupabaseOrderController {
     }
 
     @GetMapping("/jpa/orders/{id}")
-    public ResponseEntity<OrderEntity> getOrderByIdJPA(@PathVariable Long id) {
+    public ResponseEntity<OrderEntity> getOrderByIdJPA(@PathVariable String id) {
         return orderRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/jpa/orders/license-plate/{licensePlate}")
+    public ResponseEntity<List<OrderEntity>> getOrdersByLicensePlateJPA(@PathVariable String licensePlate) {
+        List<OrderEntity> orders = orderRepository.findByLicensePlate(licensePlate);
+        return ResponseEntity.ok(orders);
     }
 
     @GetMapping("/jpa/orders/customer/{name}")
@@ -45,22 +48,14 @@ public class SupabaseOrderController {
         List<OrderEntity> orders = orderRepository.findByCustomerName(name);
         return ResponseEntity.ok(orders);
     }
-
-    @PutMapping("/jpa/orders/{id}")
-    public ResponseEntity<OrderEntity> updateOrderJPA(@PathVariable Long id, @RequestBody OrderEntity order) {
-        return orderRepository.findById(id)
-                .map(existingOrder -> {
-                    existingOrder.setCustomerName(order.getCustomerName());
-                    existingOrder.setProduct(order.getProduct());
-                    existingOrder.setQuantity(order.getQuantity());
-                    OrderEntity updatedOrder = orderRepository.save(existingOrder);
-                    return ResponseEntity.ok(updatedOrder);
-                })
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/jpa/orders/product/{product}")
+    public ResponseEntity<List<OrderEntity>> getOrdersByProductJPA(@PathVariable String product) {
+        List<OrderEntity> orders = orderRepository.findByProduct(product);
+        return ResponseEntity.ok(orders);
     }
 
     @DeleteMapping("/jpa/orders/{id}")
-    public ResponseEntity<Void> deleteOrderJPA(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteOrderJPA(@PathVariable String id) {
         if (orderRepository.existsById(id)) {
             orderRepository.deleteById(id);
             return ResponseEntity.noContent().build();
@@ -68,34 +63,6 @@ public class SupabaseOrderController {
         return ResponseEntity.notFound().build();
     }
 
+    
 
-    @PostMapping("/rest/orders")
-    public ResponseEntity<String> createOrderREST(@RequestBody OrderEntity order) {
-        return supabaseService.insertData("orders", order);
-    }
-
-    @GetMapping("/rest/orders")
-    public ResponseEntity<String> getAllOrdersREST() {
-        return supabaseService.queryData("orders", "");
-    }
-
-    @GetMapping("/rest/orders/{id}")
-    public ResponseEntity<String> getOrderByIdREST(@PathVariable Long id) {
-        return supabaseService.queryData("orders", "?id=eq." + id);
-    }
-
-    @GetMapping("/rest/orders/customer/{name}")
-    public ResponseEntity<String> getOrdersByCustomerREST(@PathVariable String name) {
-        return supabaseService.queryData("orders", "?customer_name=eq." + name);
-    }
-
-    @PutMapping("/rest/orders/{id}")
-    public ResponseEntity<String> updateOrderREST(@PathVariable Long id, @RequestBody OrderEntity order) {
-        return supabaseService.updateData("orders", "?id=eq." + id, order);
-    }
-
-    @DeleteMapping("/rest/orders/{id}")
-    public ResponseEntity<String> deleteOrderREST(@PathVariable Long id) {
-        return supabaseService.deleteData("orders", "?id=eq." + id);
-    }
 }

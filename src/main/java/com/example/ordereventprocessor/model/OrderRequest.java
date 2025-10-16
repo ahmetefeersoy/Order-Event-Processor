@@ -3,26 +3,23 @@ package com.example.ordereventprocessor.model;
 public class OrderRequest {
     private String orderId;
     private String product;
-    private int amount;
     private String customerName;
     private String customerPhoneNumber;
     private String customerEmail;
+    private String licensePlate;
 
-    public OrderRequest(String orderId, String product, int quantity) {
+    public OrderRequest(String orderId, String product, int quantity, String customerName, String customerPhoneNumber, String customerEmail, String licensePlate) {
         this.orderId = orderId;
         this.product = product;
+        this.customerName = customerName;
+        this.customerPhoneNumber = customerPhoneNumber;
+        this.customerEmail = customerEmail;
+        this.licensePlate = licensePlate;
+
     }
 
     public void setProduct(String product) {
         this.product = product;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     public String getCustomerName() {
@@ -60,4 +57,11 @@ public class OrderRequest {
     public String getProduct() {
         return product;
     }
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
 }

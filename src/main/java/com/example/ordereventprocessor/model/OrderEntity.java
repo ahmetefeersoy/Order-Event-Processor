@@ -11,18 +11,19 @@ public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String customerName;
+    private String orderId;
     private String product;
-    private int quantity;
+    private String customerName;
+    private String customerPhoneNumber;
+    private String customerEmail;
+    private String licensePlate;
 
 
-    public Long getId() {
-        return id;
+    public String getOrderId() {
+        return orderId;
     }
-    public void setId(Long id) {
-        this.id = id;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
     public String getCustomerName() {
         return customerName;
@@ -36,12 +37,29 @@ public class OrderEntity {
     public void setProduct(String product) {
         this.product = product;
     }
-    public int getQuantity() {
-        return quantity;
-    }
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+
+    public String getCustomerPhoneNumber() {
+        return customerPhoneNumber;
     }
 
-    
+    public void setCustomerPhoneNumber(String customerPhoneNumber) {
+        this.customerPhoneNumber = customerPhoneNumber;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
 }
