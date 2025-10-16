@@ -1,14 +1,14 @@
 package com.example.ordereventprocessor.model;
 
-public class OrderRequest {
-    private String orderId;
+public class OrderDTO {
+    private Long orderId;
     private String product;
     private String customerName;
     private String customerPhoneNumber;
     private String customerEmail;
     private String licensePlate;
 
-    public OrderRequest(String orderId, String product, int quantity, String customerName, String customerPhoneNumber, String customerEmail, String licensePlate) {
+    public OrderDTO(Long orderId, String product, int quantity, String customerName, String customerPhoneNumber, String customerEmail, String licensePlate) {
         this.orderId = orderId;
         this.product = product;
         this.customerName = customerName;
@@ -46,11 +46,11 @@ public class OrderRequest {
         this.customerEmail = customerEmail;
     }
 
-    public String getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 

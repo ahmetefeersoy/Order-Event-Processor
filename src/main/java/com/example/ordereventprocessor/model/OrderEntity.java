@@ -11,7 +11,7 @@ public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String orderId;
+    private Long orderId;
     private String product;
     private String customerName;
     private String customerPhoneNumber;
@@ -19,10 +19,10 @@ public class OrderEntity {
     private String licensePlate;
 
 
-    public String getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
-    public void setOrderId(String orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
     public String getCustomerName() {

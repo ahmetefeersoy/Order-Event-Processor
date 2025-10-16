@@ -1,0 +1,73 @@
+### Test Order Event Processor API
+### Base URL: http://localhost:8080
+
+### 🧪 KAFKA TEST - Create order and check terminal for Kafka logs
+### Look for: 📤 Sent message & 📥 Consumed message
+POST http://localhost:8080/api/supabase/jpa/orders
+Content-Type: application/json
+
+{
+  "product": "Kafka Test Product",
+  "customerName": "Kafka Test User",
+  "customerPhoneNumber": "+905551111111",
+  "customerEmail": "kafka@test.com",
+  "licensePlate": "34KAFKA99"
+}
+
+###
+
+### 1. Create a new order
+POST http://localhost:8080/api/supabase/jpa/orders
+Content-Type: application/json
+
+{
+  "product": "UTTS",
+  "customerName": "Ahmet Efe Ersoy",
+  "customerPhoneNumber": "+905551234567",
+  "customerEmail": "ahmet@example.com",
+  "licensePlate": "06PLATE123"
+}
+
+###
+
+### 2. Get all orders
+GET http://localhost:8080/api/supabase/jpa/orders
+
+###
+
+### 3. Get order by ID (Long type - use number returned from create)
+GET http://localhost:8080/api/supabase/jpa/orders/1
+
+###
+
+### 4. Get orders by license plate
+GET http://localhost:8080/api/supabase/jpa/orders/license-plate/34ABC123
+
+###
+
+### 5. Get orders by customer name
+GET http://localhost:8080/api/supabase/jpa/orders/customer/Ahmet Efe Ersoy
+
+###
+
+### 6. Get orders by product
+GET http://localhost:8080/api/supabase/jpa/orders/product/Laptop
+
+###
+
+### 7. Delete order by ID (replace {orderId} with actual ID)
+DELETE http://localhost:8080/api/supabase/jpa/orders/3
+
+###
+
+### 8. Create another order (for testing multiple orders)
+POST http://localhost:8080/api/supabase/jpa/orders
+Content-Type: application/json
+
+{
+  "product": "Phone",
+  "customerName": "Mehmet Yılmaz",
+  "customerPhoneNumber": "+905559876543",
+  "customerEmail": "mehmet@example.com",
+  "licensePlate": "06XYZ789"
+}

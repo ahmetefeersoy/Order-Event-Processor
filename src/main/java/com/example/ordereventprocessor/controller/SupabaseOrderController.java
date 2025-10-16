@@ -1,7 +1,9 @@
 package com.example.ordereventprocessor.controller;
 
+import com.example.ordereventprocessor.model.OrderDTO;
 import com.example.ordereventprocessor.model.OrderEntity;
 import com.example.ordereventprocessor.repository.OrderRepository;
+import com.example.ordereventprocessor.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,15 +14,17 @@ import java.util.List;
 public class SupabaseOrderController {
 
     private final OrderRepository orderRepository;
+    private final OrderService orderService;
 
-    public SupabaseOrderController(OrderRepository orderRepository) {
+    public SupabaseOrderController(OrderRepository orderRepository, OrderService orderService) {
         this.orderRepository = orderRepository;
+        this.orderService = orderService;
     }
 
 
     @PostMapping("/jpa/orders")
-    public ResponseEntity<OrderEntity> createOrderJPA(@RequestBody OrderEntity order) {
-        OrderEntity savedOrder = orderRepository.save(order);
+    public ResponseEntity<OrderEntity> createOrderJPA(@RequestBody OrderDTO orderDTO) {
+        OrderEntity savedOrder = orderService.createOrder(orderDTO);
         return ResponseEntity.ok(savedOrder);
     }
 
@@ -31,7 +35,7 @@ public class SupabaseOrderController {
     }
 
     @GetMapping("/jpa/orders/{id}")
-    public ResponseEntity<OrderEntity> getOrderByIdJPA(@PathVariable String id) {
+    public ResponseEntity<OrderEntity> getOrderByIdJPA(@PathVariable Long id) {
         return orderRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -55,7 +59,7 @@ public class SupabaseOrderController {
     }
 
     @DeleteMapping("/jpa/orders/{id}")
-    public ResponseEntity<Void> deleteOrderJPA(@PathVariable String id) {
+    public ResponseEntity<Void> deleteOrderJPA(@PathVariable Long id) {
         if (orderRepository.existsById(id)) {
             orderRepository.deleteById(id);
             return ResponseEntity.noContent().build();
