@@ -1,6 +1,6 @@
 package com.example.ordereventprocessor.controller;
 
-import com.example.ordereventprocessor.model.OrderDTO;
+import com.example.ordereventprocessor.dto.OrderDTO;
 import com.example.ordereventprocessor.model.OrderEntity;
 import com.example.ordereventprocessor.repository.OrderRepository;
 import com.example.ordereventprocessor.service.OrderService;
@@ -21,7 +21,7 @@ public class SupabaseOrderController {
         this.orderService = orderService;
     }
 
-
+    // Her şey DB'ye kaydedildikten sonra kafkaya event atmalı. !!!!!!!!!!!!!!!!
     @PostMapping("/jpa/orders")
     public ResponseEntity<OrderEntity> createOrderJPA(@RequestBody OrderDTO orderDTO) {
         OrderEntity savedOrder = orderService.createOrder(orderDTO);

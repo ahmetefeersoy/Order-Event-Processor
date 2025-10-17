@@ -4,6 +4,8 @@ import  jakarta.persistence.GeneratedValue;
 import  jakarta.persistence.GenerationType;
 import  jakarta.persistence.Id;
 import  jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 @Table(name = "orders")
@@ -12,54 +14,37 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
-    private String product;
-    private String customerName;
-    private String customerPhoneNumber;
-    private String customerEmail;
-    private String licensePlate;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private CustomerEntity customer;
+
+    @ManyToOne
+    @JoinColumn(name = "vehicle_id", nullable = false)
+    private VehicleEntity vehicle;
 
     public Long getOrderId() {
         return orderId;
     }
+
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
-    public String getCustomerName() {
-        return customerName;
-    }
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-    public String getProduct() {
-        return product;
-    }
-    public void setProduct(String product) {
-        this.product = product;
+
+    public CustomerEntity getCustomer() {
+        return customer;
     }
 
-    public String getCustomerPhoneNumber() {
-        return customerPhoneNumber;
+    public void setCustomer(CustomerEntity customer) {
+        this.customer = customer;
     }
 
-    public void setCustomerPhoneNumber(String customerPhoneNumber) {
-        this.customerPhoneNumber = customerPhoneNumber;
+    public VehicleEntity getVehicle() {
+        return vehicle;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
-
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
-
-    public String getLicensePlate() {
-        return licensePlate;
-    }
-
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
+    public void setVehicle(VehicleEntity vehicle) {
+        this.vehicle = vehicle;
     }
 
 }
