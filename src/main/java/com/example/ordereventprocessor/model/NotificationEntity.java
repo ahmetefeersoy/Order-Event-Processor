@@ -13,6 +13,10 @@ public class NotificationEntity {
 
     private String recipientEmail;
 
+    private Long timestamp;
+
+
+
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private CustomerEntity customer;
@@ -47,5 +51,12 @@ public class NotificationEntity {
 
     public void setCustomer(CustomerEntity customer) {
         this.customer = customer;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 }

@@ -10,13 +10,14 @@ public class CustomerDTO {
     private List<Long> orderIds;
     private List<Long> notificationIds;
 
-  
-
-    public CustomerDTO(Long customerId, String name, String email, String phoneNumber) {
+    public CustomerDTO(Long customerId, String name, String email, String phoneNumber,
+            List<Long> orderIds, List<Long> notificationIds) {
         this.customerId = customerId;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.orderIds = orderIds;
+        this.notificationIds = notificationIds;
     }
 
     public Long getCustomerId() {

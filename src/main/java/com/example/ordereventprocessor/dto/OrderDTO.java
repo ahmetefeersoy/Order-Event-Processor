@@ -7,20 +7,19 @@ public class OrderDTO {
     private String customerEmail;
     private String customerPhoneNumber;
     private Long vehicleId;
-    private String licensePlate;
+    private String vehicleLicensePlate;
 
     public OrderDTO(Long orderId, Long customerId, String customerName, String customerEmail,
-            String customerPhoneNumber, Long vehicleId, String licensePlate) {
+            String customerPhoneNumber, Long vehicleId, String vehicleLicensePlate) {
         this.orderId = orderId;
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.customerPhoneNumber = customerPhoneNumber;
         this.vehicleId = vehicleId;
-        this.licensePlate = licensePlate;
+        this.vehicleLicensePlate = vehicleLicensePlate;
     }
 
-    // Getters and Setters
     public Long getOrderId() {
         return orderId;
     }
@@ -35,6 +34,14 @@ public class OrderDTO {
 
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
+    }
+
+    public Long getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(Long vehicleId) {
+        this.vehicleId = vehicleId;
     }
 
     public String getCustomerName() {
@@ -61,19 +68,12 @@ public class OrderDTO {
         this.customerPhoneNumber = customerPhoneNumber;
     }
 
-    public Long getVehicleId() {
-        return vehicleId;
+    public String getVehicleLicensePlate() {
+        return vehicleLicensePlate;
     }
 
-    public void setVehicleId(Long vehicleId) {
-        this.vehicleId = vehicleId;
+    public void setVehicleLicensePlate(String vehicleLicensePlate) {
+        this.vehicleLicensePlate = vehicleLicensePlate;
     }
 
-    public String getLicensePlate() {
-        return licensePlate;
-    }
-
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
-    }
 }

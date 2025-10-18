@@ -5,7 +5,7 @@ public class NotificationDTO {
     private String message;
     private String recipientEmail;
     private Long customerId;
-    private String customerName;
+    private Long timestamp;
 
     public NotificationDTO() {
     }
@@ -15,6 +15,7 @@ public class NotificationDTO {
         this.message = message;
         this.recipientEmail = recipientEmail;
         this.customerId = customerId;
+        this.timestamp = System.currentTimeMillis();
     }
 
     public Long getNotificationId() {
@@ -49,11 +50,12 @@ public class NotificationDTO {
         this.customerId = customerId;
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
+  
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public Long getTimestamp() {
+        return timestamp;
+    }
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 }

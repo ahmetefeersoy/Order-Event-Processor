@@ -7,11 +7,10 @@ public class VehicleDTO {
     private String licensePlate;
     private List<Long> orderIds;
 
-   
-
-    public VehicleDTO(Long vehicleId, String licensePlate) {
+    public VehicleDTO(Long vehicleId, String licensePlate, List<Long> orderIds) {
         this.vehicleId = vehicleId;
         this.licensePlate = licensePlate;
+        this.orderIds = orderIds;
     }
 
     public Long getVehicleId() {
