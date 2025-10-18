@@ -45,7 +45,7 @@ public class OrderService {
         order.setVehicle(vehicle);
         OrderEntity savedOrder = _orderRepository.save(order);
 
-        _kafkaProducer.sendOrderEvent(savedOrder);
+        _kafkaProducer.createEvent("ORDER_CREATED", savedOrder);
 
         return savedOrder;
     }

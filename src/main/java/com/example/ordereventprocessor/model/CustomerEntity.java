@@ -28,6 +28,9 @@ public class CustomerEntity {
     @OneToMany(mappedBy = "customer")
     private List<NotificationEntity> notifications;
 
+    @OneToMany(mappedBy = "customer")
+    private List<VehicleEntity> vehicles;
+
     public Long getCustomerId() {
         return customerId;
     }
@@ -75,5 +78,13 @@ public class CustomerEntity {
     public void setNotifications(List<NotificationEntity> notifications) {
         this.notifications = notifications;
     }
+
+    public List<VehicleEntity> getVehicles() {
+        return vehicles;
+    }
+    public void setVehicles(List<VehicleEntity> vehicles) {
+        this.vehicles = vehicles;
+    }
+    
 
 }

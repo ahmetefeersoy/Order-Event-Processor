@@ -10,14 +10,13 @@ public class OrderDTO {
     private String vehicleLicensePlate;
 
     public OrderDTO(Long orderId, Long customerId, String customerName, String customerEmail,
-            String customerPhoneNumber, Long vehicleId, String vehicleLicensePlate) {
+            String customerPhoneNumber, Long vehicleId) {
         this.orderId = orderId;
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.customerPhoneNumber = customerPhoneNumber;
         this.vehicleId = vehicleId;
-        this.vehicleLicensePlate = vehicleLicensePlate;
     }
 
     public Long getOrderId() {

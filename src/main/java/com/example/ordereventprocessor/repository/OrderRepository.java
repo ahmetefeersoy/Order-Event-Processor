@@ -15,6 +15,5 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     
     List<OrderEntity> findByCustomerNameContainingIgnoreCase(String customerName);
 
-    List<OrderEntity> findByLicensePlate(String licensePlate);
 
 }

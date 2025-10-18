@@ -29,17 +29,30 @@ public class VehicleService {
     }
 
     public VehicleEntity createVehicle(VehicleDTO vehicleDTO) {
-        VehicleEntity vehicle = _vehicleRepository.findByLicensePlate(vehicleDTO.getLicensePlate())
-                .orElseGet(() -> {
-                    VehicleEntity v = new VehicleEntity();
-                    v.setVehicleId(vehicleDTO.getVehicleId());
-                    v.setLicensePlate(vehicleDTO.getLicensePlate());
-                    return v;
-                });
+        if (_vehicleRepository.findByLicensePlate(vehicleDTO.getLicensePlate()).isPresent()) {
+            throw new IllegalArgumentException("Vehicle with this license plate already exists");
+        }
+        if (vehicleDTO.getLicensePlate() == null || vehicleDTO.getLicensePlate().isEmpty()) {
+            throw new IllegalArgumentException("License plate is required.");
+        }
+        if (!_vehicleRepository.isLicensePlateUnique(vehicleDTO.getLicensePlate())) {
+            throw new IllegalArgumentException("License plate must be unique.");
+        }
 
+        if (vehicleDTO.getCustomerId() == null) {
+            throw new IllegalArgumentException("Customer ID is required.");
+        }
+
+        VehicleEntity vehicle = new VehicleEntity();
         vehicle.setLicensePlate(vehicleDTO.getLicensePlate());
+
+        CustomerEntity customer = _customerRepository.findById(vehicleDTO.getCustomerId())
+                .orElseThrow(() -> new RuntimeException("Customer not found with ID: " + vehicleDTO.getCustomerId()));
+        vehicle.setCustomer(customer);
+
+
+        _kafkaProducer.createEvent("VEHICLE_CREATED", vehicle);
         return _vehicleRepository.save(vehicle);
     }
-    
 
 }

@@ -1,16 +1,15 @@
 package com.example.ordereventprocessor.dto;
 
-import java.util.List;
-
 public class VehicleDTO {
     private Long vehicleId;
     private String licensePlate;
-    private List<Long> orderIds;
+    private Long customerId;
 
-    public VehicleDTO(Long vehicleId, String licensePlate, List<Long> orderIds) {
+   
+    public VehicleDTO(Long vehicleId, String licensePlate, Long customerId) {
         this.vehicleId = vehicleId;
         this.licensePlate = licensePlate;
-        this.orderIds = orderIds;
+        this.customerId = customerId;
     }
 
     public Long getVehicleId() {
@@ -29,11 +28,11 @@ public class VehicleDTO {
         this.licensePlate = licensePlate;
     }
 
-    public List<Long> getOrderIds() {
-        return orderIds;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setOrderIds(List<Long> orderIds) {
-        this.orderIds = orderIds;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 }
